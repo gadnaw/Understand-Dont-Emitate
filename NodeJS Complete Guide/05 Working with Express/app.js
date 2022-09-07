@@ -19,8 +19,11 @@ const shopRoutes = require("./routes/shop");
 // npm install --save body-parser
 /////
 const bodyParser = require("body-parser");
-const { request } = require("express");
+// const { request } = require("express");
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//NOTE: this is how to add public static assets
+app.use(express.static(path.join(__dirname, "public")));
 
 //Note: be careful with the order if you use "app.use"
 /** @param "/admin" --> instead of /admin/add-product
