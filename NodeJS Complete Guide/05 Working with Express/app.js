@@ -1,6 +1,10 @@
 const express = require("express");
 
 const app = express();
+
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+
 //START HERE FOR MIDDLEWARE
 
 // app.use([path,] callback [, callback...])
@@ -13,31 +17,21 @@ const app = express();
 // npm install --save body-parser
 /////
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded());
+const { request } = require("express");
+app.use(bodyParser.urlencoded({ extended: false }));
 
+//Note: be careful with the order if you use "app.use"
+/** @param "/admin" --> instead of /admin/add-product
+ * "/admin" is common path
+ */
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+
+//404 Error
+app.use((req, res, next) => {
+  res.status(404).send("<h1>page dont exist</h1>");
+});
 //
-//
-
-app.use("/", (req, res, next) => {
-  console.log("This always run");
-  next();
-});
-
-app.use("/add-product", (req, res, next) => {
-  res.send(
-    '<form action="/product" method="POST" ><input type="text" name="title"><button type="submit">Submit</button></form>'
-  );
-});
-
-//POST Method
-app.post("/product", (req, res) => {
-  console.log(req.body); //this is posible because of body-parser
-  res.location("/");
-});
-
-app.use("/", (req, res, next) => {
-  res.send("<h1>Hello from Express</h1>");
-});
 
 //END HERE FOR MIDDLEWARE
 app.listen(8080);
