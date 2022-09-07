@@ -1,3 +1,5 @@
+const path = require("path");
+
 const express = require("express");
 
 //pluggable express app for routes
@@ -7,9 +9,8 @@ const Router = express.Router();
 
 //GET Method
 Router.get("/add-product", (req, res, next) => {
-  res.send(
-    '<form action="/admin/add-product" method="POST" ><input type="text" name="title"><button type="submit">Submit</button></form>'
-  );
+  //path core module
+  res.sendFile(path.join(__dirname, "../", "views", "add-product.html"));
 });
 
 //POST Method

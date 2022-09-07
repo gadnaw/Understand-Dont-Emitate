@@ -1,3 +1,5 @@
+const path = require("path");
+
 const express = require("express");
 
 const app = express();
@@ -29,7 +31,7 @@ app.use(shopRoutes);
 
 //404 Error
 app.use((req, res, next) => {
-  res.status(404).send("<h1>page dont exist</h1>");
+  res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
 });
 //
 
