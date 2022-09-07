@@ -14,3 +14,17 @@
 1. you want to focus on your Business Logic, not on the nitty-gritty Details
 1. Use a Framework for the Heavy Lifting
 
+Source Code  express/lib/response.js
+
+# app.use
+app.use([path,] callback [, callback...])
+
+## app.get()
+ - is an app.use but only for get requests
+
+## app.post()
+ - is an app.use but only for post requests
+
+## app.patch()
+## app.put()
+## app.delete()
